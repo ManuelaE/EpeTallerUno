@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class PantallaUno extends AppCompatActivity {
 
+    Cliente c;
     Button btnSiguiente;
 
     @Override
@@ -15,10 +16,15 @@ public class PantallaUno extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_uno);
 
+        c = new Cliente();
+        c.start();
+
         btnSiguiente = findViewById(R.id.btn_siguiente);
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                c.enviar("6");
 
                 Intent intento = new Intent(getApplicationContext(), PantallaDos.class);
                 startActivity(intento);

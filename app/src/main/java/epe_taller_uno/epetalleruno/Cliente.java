@@ -11,22 +11,12 @@ class Cliente extends Thread{
 
     Socket s;
 
-    MainActivity activity;
-
-    public Cliente ( MainActivity activity ) {
-        this.activity = activity;
-    }
-
     @Override
     public void run() {
 
         try{
 
             s = new Socket("10.103.10.57", 5000);
-
-            //Receptor rec = new Receptor( s );
-            // rec.setObserver(activity);
-            //rec.start();
 
         } catch (Exception e){
 

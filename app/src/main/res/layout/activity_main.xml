@@ -20,9 +20,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/btn_mensaje5"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="25dp"
-                android:background="@drawable/bordes_redondos2"/>
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/b_stop"
+                />
 
         </LinearLayout>
 
@@ -36,8 +37,8 @@
                 android:layout_height="120dp"
                 android:id="@+id/btn_mensaje1"
                 android:layout_marginTop="40dp"
-                android:layout_marginLeft="60dp"
-                android:background="@drawable/bordes_redondos"/>
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/b_izq"/>
 
             <Button
                 android:layout_width="120dp"
@@ -45,7 +46,8 @@
                 android:id="@+id/btn_mensaje3"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="50dp"
-                android:background="@drawable/bordes_redondos"/>
+                android:layout_marginRight="40dp"
+                android:background="@drawable/b_der"/>
 
         </LinearLayout>
 
@@ -54,24 +56,23 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <Button
-            android:layout_width="120dp"
-            android:layout_height="120dp"
             android:id="@+id/btn_mensaje2"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="60dp"
-            android:background="@drawable/bordes_redondos"/>
-
-        <Button
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:id="@+id/btn_mensaje4"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="60dp"
-            android:background="@drawable/bordes_redondos"/>
+            android:layout_marginTop="50dp"
+            android:background="@drawable/b_dis" />
+
+        <Button
+            android:id="@+id/btn_mensaje4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/b_sdis" />
 
     </LinearLayout>
 

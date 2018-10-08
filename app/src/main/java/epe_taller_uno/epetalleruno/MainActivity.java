@@ -12,13 +12,14 @@ public class MainActivity extends AppCompatActivity {
     Button btnMensajeDos;
     Button btnMensajeTres;
     Button btnMensajeCuatro;
+    Button btnMensajeCinco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        c = new Cliente(this);
+        c = new Cliente();
         c.start();
 
         btnMensajeUno = findViewById(R.id.btn_mensaje1);
@@ -54,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 c.enviar("4");
+            }
+        });
+
+        btnMensajeCinco = findViewById(R.id.btn_mensaje5);
+        btnMensajeCinco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                c.enviar("5");
             }
         });
     }
