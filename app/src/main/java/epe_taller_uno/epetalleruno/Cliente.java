@@ -16,7 +16,7 @@ class Cliente extends Thread{
 
         try{
 
-            s = new Socket("10.103.10.57", 5000);
+            s = new Socket("192.168.1.22", 5000);
 
         } catch (Exception e){
 
