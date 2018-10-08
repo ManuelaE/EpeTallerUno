@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
+
 public class PantallaUno extends AppCompatActivity {
 
     Cliente c;
@@ -16,8 +18,7 @@ public class PantallaUno extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_uno);
 
-        c = new Cliente();
-        c.start();
+        c = Cliente.getInstance();
 
         btnSiguiente = findViewById(R.id.btn_siguiente);
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +28,9 @@ public class PantallaUno extends AppCompatActivity {
                 c.enviar("6");
 
                 Intent intento = new Intent(getApplicationContext(), PantallaDos.class);
+                //Bundle bundle = new Bundle();
+               // bundle.putSerializable("cliente", (Serializable) c);
+               // intento.putExtras(bundle);
                 startActivity(intento);
             }
         });

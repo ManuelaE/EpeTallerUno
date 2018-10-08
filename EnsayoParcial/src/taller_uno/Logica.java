@@ -68,14 +68,14 @@ public class Logica implements Servidor.Mensaje {
 		ganar = p.loadImage("../data/ganar.png");
 		nivelC = p.loadImage("../data/meta_c.png");
 		
-		meta_1 = p.loadImage("../data/meta_1");
-		meta_2 = p.loadImage("../data/meta_2");
-		meta_3 = p.loadImage("../data/meta_3");
-		meta_4 = p.loadImage("../data/meta_4");
-		meta_5 = p.loadImage("../data/meta_5");
-		meta_6 = p.loadImage("../data/meta_6");
-		meta_7 = p.loadImage("../data/meta_7");
-		meta_8 = p.loadImage("../data/meta_8");
+		meta_1 = p.loadImage("../data/meta_1.png");
+		meta_2 = p.loadImage("../data/meta_2.png");
+		meta_3 = p.loadImage("../data/meta_3.png");
+		meta_4 = p.loadImage("../data/meta_4.png");
+		meta_5 = p.loadImage("../data/meta_5.png");
+		meta_6 = p.loadImage("../data/meta_6.png");
+		meta_7 = p.loadImage("../data/meta_7.png");
+		meta_8 = p.loadImage("../data/meta_8.png");
 
 		// Iniciar
 		iniciando();
@@ -234,7 +234,14 @@ public class Logica implements Servidor.Mensaje {
 					if (o.getVida() == 0) {
 
 						ovnis.remove(j);
+						
 						System.out.println("Lo mató!");
+						
+						if (o instanceof OvniG) {
+
+							logro += 1;
+							
+						}
 					}
 
 					if (o instanceof OvniP) {
@@ -248,7 +255,7 @@ public class Logica implements Servidor.Mensaje {
 					} else if (o instanceof OvniG) {
 
 						puntos += 100;
-						logro += 1;
+						
 					}
 				}
 			}
@@ -282,11 +289,13 @@ public class Logica implements Servidor.Mensaje {
 			if (p.dist(obj.getX(), obj.getY(), shooter1.getX(), shooter1.getY()) < 50) {
 				objetos.remove(obj);
 				shooter1.sumaVida();
+				return;
 			}
 
 			if (p.dist(obj.getX(), obj.getY(), shooter2.getX(), shooter2.getY()) < 50) {
 				shooter2.sumaVida();
 				objetos.remove(obj);
+				return;
 			}
 		}
 	}
@@ -588,7 +597,7 @@ public class Logica implements Servidor.Mensaje {
 
 				// Siguiente
 				else if (msj == 6) {
-					pantalla = 6;
+					pantalla = 2;
 				}
 
 				// Jugar

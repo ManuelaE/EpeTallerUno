@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
+
 public class PantallaDos extends AppCompatActivity {
 
     Cliente c;
@@ -16,8 +18,10 @@ public class PantallaDos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_dos);
 
-        c = new Cliente();
-        c.start();
+        //Intent i = this.getIntent();
+        ///Bundle b = i.getExtras();
+        //c = (Cliente) b.getSerializable("cliente");
+        c = Cliente.getInstance();
 
         btnJugar = findViewById(R.id.btn_jugar);
         btnJugar.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +31,9 @@ public class PantallaDos extends AppCompatActivity {
                 c.enviar("7");
 
                 Intent intento = new Intent(getApplicationContext(), MainActivity.class);
+                //Bundle bundle = new Bundle();
+                //bundle.putSerializable("cliente", (Serializable) c);
+                //intento.putExtras(bundle);
                 startActivity(intento);
             }
         });

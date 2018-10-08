@@ -1,5 +1,6 @@
 package epe_taller_uno.epetalleruno;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        c = new Cliente();
-        c.start();
+        //Intent i = this.getIntent();
+        //Bundle b = i.getExtras();
+        //c = (Cliente) b.getSerializable("cliente");
+
+        c = Cliente.getInstance();
 
         btnMensajeUno = findViewById(R.id.btn_mensaje1);
         btnMensajeUno.setOnClickListener(new View.OnClickListener() {

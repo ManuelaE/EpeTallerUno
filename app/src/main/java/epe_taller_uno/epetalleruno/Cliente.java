@@ -5,18 +5,24 @@ import android.util.Log;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.net.Socket;
 
-class Cliente extends Thread{
+class Cliente extends Thread {
 
     Socket s;
+    public static Cliente reference;
+
+    private Cliente (){
+
+    }
 
     @Override
     public void run() {
 
         try{
 
-            s = new Socket("192.168.1.22", 5000);
+            s = new Socket("172.30.159.156", 5000);
 
         } catch (Exception e){
 
@@ -46,5 +52,13 @@ class Cliente extends Thread{
                 }
             }
         }).start();
+    }
+
+    public synchronized static Cliente getInstance(){
+        if(reference==null){
+            reference = new Cliente();
+            reference.start();
+        }
+        return reference;
     }
 }
