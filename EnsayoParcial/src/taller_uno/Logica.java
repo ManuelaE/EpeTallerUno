@@ -20,7 +20,7 @@ public class Logica implements Servidor.Mensaje {
 
 	// Declaro imágenes
 	private PImage fondo, pantalla_1, pantalla_3, ins_1, ins_2, perder_1, perder_2, ganar;
-	private PImage boton_comenzar, nivelC, perder_3;
+	private PImage boton_comenzar, nivelC, perder_3, jugar;
 	private PImage meta_1, meta_2, meta_3, meta_4, meta_5, meta_6, meta_7, meta_8;
 
 	// Declaro variables
@@ -67,6 +67,7 @@ public class Logica implements Servidor.Mensaje {
 		perder_3 = p.loadImage("../data/perder_3.png");
 		ganar = p.loadImage("../data/ganar.png");
 		nivelC = p.loadImage("../data/meta_c.png");
+		jugar = p.loadImage("../data/jugar.png");
 		
 		meta_1 = p.loadImage("../data/meta_1.png");
 		meta_2 = p.loadImage("../data/meta_2.png");
@@ -178,7 +179,9 @@ public class Logica implements Servidor.Mensaje {
 				shooter1.morir(bala.getDaño());
 
 				if (shooter1.getVida() < 0) {
+					terminar();
 					pantalla = 4;
+					limpiar();
 					System.out.println("Se murió jugador uno");
 				}
 
@@ -190,7 +193,9 @@ public class Logica implements Servidor.Mensaje {
 				shooter2.morir(bala.getDaño());
 
 				if (shooter2.getVida() < 0) {
+					terminar();
 					pantalla = 5;
+					limpiar();
 					System.out.println("Se murió jugador dos");
 				}
 
@@ -317,7 +322,7 @@ public class Logica implements Servidor.Mensaje {
 			if (bala.isEliminame() == true) {
 				bala.interrupted();
 				balasPer.remove(bala);
-				return;
+				return; 
 			}
 		}
 
@@ -474,6 +479,11 @@ public class Logica implements Servidor.Mensaje {
 		case 6:
 			p.image(ganar, 0, 0);
 			break;
+			
+		// Comenzar a jugar
+		case 7:
+			p.image(jugar, 0, 0);
+			break;
 
 		// Los ovnis alcanzaron a los usuarios
 		case 11:
@@ -484,7 +494,7 @@ public class Logica implements Servidor.Mensaje {
 
 	// Este método pinta la interaación del botón principal
 	public void comenzar() {
-		// System.out.println(p.mouseX + "," + p.mouseY);
+		System.out.println(p.mouseX + "," + p.mouseY);
 
 		if (pantalla == 0) {
 
@@ -497,7 +507,7 @@ public class Logica implements Servidor.Mensaje {
 
 		if (pantalla == 1) {
 
-			if (p.mouseX > 0 && p.mouseX < 100 && p.mouseY > 0 && p.mouseY < 100) {
+			if (p.mouseX > 0 && p.mouseX < 1200 && p.mouseY > 0 && p.mouseY < 700) {
 
 				pantalla = 2;
 			}
@@ -505,7 +515,7 @@ public class Logica implements Servidor.Mensaje {
 
 		if (pantalla == 2) {
 
-			if (p.mouseX > 0 && p.mouseX < 100 && p.mouseY > 600 && p.mouseY < 700) {
+			if (p.mouseX > 0 && p.mouseX < 1200 && p.mouseY > 0 && p.mouseY < 700) {
 				restar = p.millis();
 				pantalla = 3;
 				enJuego = true;
@@ -525,18 +535,26 @@ public class Logica implements Servidor.Mensaje {
 			}
 		}
 
-		if (pantalla == 11) {
+		if (pantalla == 11 || pantalla == 4 || pantalla == 5) {
 
-			if (p.mouseX > 687 && p.mouseX < 977 && p.mouseY > 73 && p.mouseY < 644) {
-				pantalla = 13;
+			if (p.mouseX > 365 && p.mouseX < 599 && p.mouseY > 265 && p.mouseY < 437) {
+				pantalla = 7;
 			}
 		}
 
-		if (pantalla == 13) {
+		if (pantalla == 7) {
 
-			if (p.mouseX > 365 && p.mouseX < 832 && p.mouseY > 266 && p.mouseY < 437) {
+			if (p.mouseX > 599 && p.mouseX < 833 && p.mouseY > 265 && p.mouseY < 437) {
 				pantalla = 3;
 				iniciando();
+			}
+			
+			if (p.mouseX > 458 && p.mouseX < 742 && p.mouseY > 523 && p.mouseY < 598) {
+				pantalla = 0;
+			}
+			
+			if (p.mouseX > 1066 && p.mouseX < 1139 && p.mouseY > 64 && p.mouseY < 125) {
+				pantalla = 1;
 			}
 		}
 	}
