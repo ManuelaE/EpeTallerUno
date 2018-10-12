@@ -68,7 +68,7 @@ public class Logica implements Servidor.Mensaje {
 		ganar = p.loadImage("../data/ganar.png");
 		nivelC = p.loadImage("../data/meta_c.png");
 		jugar = p.loadImage("../data/jugar.png");
-		
+
 		meta_1 = p.loadImage("../data/meta_1.png");
 		meta_2 = p.loadImage("../data/meta_2.png");
 		meta_3 = p.loadImage("../data/meta_3.png");
@@ -78,24 +78,12 @@ public class Logica implements Servidor.Mensaje {
 		meta_7 = p.loadImage("../data/meta_7.png");
 		meta_8 = p.loadImage("../data/meta_8.png");
 
-		// Iniciar
-		iniciando();
 	}
 
 	public void pintar() {
 
 		// Métodos internos
 		pantallas();
-
-		// Para cambiar pantallas pero solo de prueba
-		p.fill(255);
-		p.rect(0, 0, 50, 50);
-		p.fill(255);
-		p.rect(0, 600, 50, 50);
-		p.fill(255);
-		p.rect(1100, 600, 50, 50);
-		p.fill(255);
-		p.rect(1000, 600, 50, 50);
 
 		if (enJuego == true) {
 			pantallaTres();
@@ -115,6 +103,8 @@ public class Logica implements Servidor.Mensaje {
 	public void iniciando() {
 
 		enJuego = true;
+		shooter1.setVidas(500);
+		shooter2.setVidas(500);
 
 		for (int i = 0; i < 2; i++) {
 			OvniP ovniPequeño = new OvniP(p);
@@ -130,10 +120,10 @@ public class Logica implements Servidor.Mensaje {
 			// A esta variable le resto el tiempo que lleva el juego desde el
 			// comienzo hasta que empieza a jugar
 			tiempo = (p.millis() - restar) / 1000;
-			
+
 			// Esta variable permite generar vidas aleatorias
 			notDead++;
-			System.out.println(notDead);
+			//System.out.println(notDead);
 
 			// Métodos internos
 			matarOvnis();
@@ -143,7 +133,7 @@ public class Logica implements Servidor.Mensaje {
 			pintarBalas();
 			generarOvnis();
 			meta();
-			
+
 			// Pinto la meta
 			p.image(nivelC, 0, 0);
 
@@ -239,13 +229,18 @@ public class Logica implements Servidor.Mensaje {
 					if (o.getVida() == 0) {
 
 						ovnis.remove(j);
-						
+
 						System.out.println("Lo mató!");
-						
+
 						if (o instanceof OvniG) {
 
 							logro += 1;
+							System.out.println(logro);
 							
+							if (logro == 2) {
+								pantalla = 6;
+							}
+
 						}
 					}
 
@@ -260,7 +255,7 @@ public class Logica implements Servidor.Mensaje {
 					} else if (o instanceof OvniG) {
 
 						puntos += 100;
-						
+
 					}
 				}
 			}
@@ -276,7 +271,7 @@ public class Logica implements Servidor.Mensaje {
 				ovnis.remove(i);
 				terminar();
 				pantalla = 11;
-				
+
 				limpiar();
 			}
 		}
@@ -307,8 +302,8 @@ public class Logica implements Servidor.Mensaje {
 
 	public void ganar() {
 
-		if (logro >= 8) {
-
+		if (logro == 1) {
+			System.out.println("lorgro: "+logro);
 			pantalla = 6;
 		}
 	}
@@ -316,24 +311,30 @@ public class Logica implements Servidor.Mensaje {
 	public void pintarBalas() {
 
 		// Pinto las balas del personaje y las remuevo cuando pasan el límite de arriba
-		for (Bala bala : balasPer) {
-			bala.pintarNormal();
+		//for (Bala bala : balasPer) {
+		for (int i = 0; i < balasPer.size(); i++) {
+			if (balasPer != null) {
+				balasPer.get(i).pintarNormal();
 
-			if (bala.isEliminame() == true) {
-				bala.interrupted();
-				balasPer.remove(bala);
-				return; 
+				if (balasPer.get(i).isEliminame() == true) {
+					balasPer.get(i).interrupted();
+					balasPer.remove(i);
+					return;
+
+				}
 			}
 		}
 
 		// Pinto las balas de los ovnis y las remuevo cuando pasan el límite de abajo
 		for (Bala bala : balasEne) {
-			bala.pintarNormal();
+			if (bala != null) {
+				bala.pintarNormal();
 
-			if (bala.isEliminame() == true) {
-				bala.interrupted();
-				balasEne.remove(bala);
-				return;
+				if (bala.isEliminame() == true) {
+					bala.interrupted();
+					balasEne.remove(bala);
+					return;
+				}
 			}
 		}
 	}
@@ -364,51 +365,51 @@ public class Logica implements Servidor.Mensaje {
 		}
 
 	}
-	
+
 	// Ests método es para volver a jugar
-	public void limpiar () {
-		
-		balasEne.removeAll(balasEne);	
+	public void limpiar() {
+
+		balasEne.removeAll(balasEne);
 		ovnis.removeAll(ovnis);
 		objetos.removeAll(objetos);
-	} 
-	
-	public void meta () {
-		
-		if ( logro == 1 ) {
+	}
+
+	public void meta() {
+
+		if (logro == 1) {
 			p.image(meta_1, 0, 0);
-			
-		} else if ( logro == 2 ) {
+
+		} else if (logro == 2) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
-			
-		} else if ( logro == 3 ) {
+
+		} else if (logro == 3) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
 			p.image(meta_3, 0, 0);
-			
-		} else if ( logro == 4 ) {
+
+		} else if (logro == 4) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
 			p.image(meta_3, 0, 0);
 			p.image(meta_4, 0, 0);
-			
-		} else if ( logro == 5 ) {
+
+		} else if (logro == 5) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
 			p.image(meta_3, 0, 0);
 			p.image(meta_4, 0, 0);
 			p.image(meta_5, 0, 0);
-			
-		} else if ( logro == 6 ) {
+
+		} else if (logro == 6) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
 			p.image(meta_3, 0, 0);
 			p.image(meta_4, 0, 0);
 			p.image(meta_5, 0, 0);
 			p.image(meta_6, 0, 0);
-			
-		} else if ( logro == 7 ) {
+
+		} else if (logro == 7) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
 			p.image(meta_3, 0, 0);
@@ -416,8 +417,8 @@ public class Logica implements Servidor.Mensaje {
 			p.image(meta_5, 0, 0);
 			p.image(meta_6, 0, 0);
 			p.image(meta_7, 0, 0);
-			
-		} else if ( logro == 8 ) {
+
+		} else if (logro == 8) {
 			p.image(meta_1, 0, 0);
 			p.image(meta_2, 0, 0);
 			p.image(meta_3, 0, 0);
@@ -437,6 +438,7 @@ public class Logica implements Servidor.Mensaje {
 		// Imagen principal
 		case 0:
 			p.image(pantalla_1, 0, 0);
+
 			break;
 
 		// Instrucciones 1
@@ -451,6 +453,7 @@ public class Logica implements Servidor.Mensaje {
 
 		// Empezar a jugar
 		case 3:
+
 			p.image(pantalla_3, 0, 0);
 
 			// Método de la clase Personaje
@@ -479,7 +482,7 @@ public class Logica implements Servidor.Mensaje {
 		case 6:
 			p.image(ganar, 0, 0);
 			break;
-			
+
 		// Comenzar a jugar
 		case 7:
 			p.image(jugar, 0, 0);
@@ -494,35 +497,40 @@ public class Logica implements Servidor.Mensaje {
 
 	// Este método pinta la interaación del botón principal
 	public void comenzar() {
-		System.out.println(p.mouseX + "," + p.mouseY);
+		//System.out.println(p.mouseX + "," + p.mouseY);
 
-		if (pantalla == 0) {
+		switch (pantalla) {
+		case 0:
 
 			if (p.mouseX > 491 && p.mouseX < 707 && p.mouseY > 520 && p.mouseY < 590) {
 
 				p.image(boton_comenzar, 0, 0);
 				pantalla = 1;
 			}
-		}
 
-		if (pantalla == 1) {
+			break;
+
+		case 1:
 
 			if (p.mouseX > 0 && p.mouseX < 1200 && p.mouseY > 0 && p.mouseY < 700) {
 
 				pantalla = 2;
 			}
-		}
 
-		if (pantalla == 2) {
+			break;
+
+		case 2:
 
 			if (p.mouseX > 0 && p.mouseX < 1200 && p.mouseY > 0 && p.mouseY < 700) {
 				restar = p.millis();
 				pantalla = 3;
 				enJuego = true;
+				iniciando();
 			}
-		}
 
-		if (pantalla == 3) {
+			break;
+
+		case 3:
 
 			if (p.mouseX > 1100 && p.mouseX < 1200 && p.mouseY > 600 && p.mouseY < 700) {
 				accionJugador("2", shooter1);
@@ -533,30 +541,63 @@ public class Logica implements Servidor.Mensaje {
 				accionJugador("2", shooter2);
 				// System.out.println("si funciona kdajsdkaj");
 			}
-		}
 
-		if (pantalla == 11 || pantalla == 4 || pantalla == 5) {
+			break;
+
+		case 4:
+
+			if (p.mouseX > 365 && p.mouseX < 833 && p.mouseY > 265 && p.mouseY < 437) {
+				pantalla = 7;
+			}
+
+			break;
+
+		case 5:
+
+			if (p.mouseX > 365 && p.mouseX < 833 && p.mouseY > 265 && p.mouseY < 437) {
+				pantalla = 7;
+			}
+
+			break;
+			
+		case 6:
+
+			if (p.mouseX > 365 && p.mouseX < 833 && p.mouseY > 265 && p.mouseY < 437) {
+				pantalla = 7;
+			}
+
+			break;
+
+		case 7:
+
+			if (p.mouseX > 365 && p.mouseX < 833 && p.mouseY > 265 && p.mouseY < 437) {
+				pantalla = 3;
+				iniciando();
+				restar = p.millis();
+			}
+
+			if (p.mouseX > 458 && p.mouseX < 742 && p.mouseY > 523 && p.mouseY < 598) {
+				pantalla = 0;
+			}
+
+			if (p.mouseX > 1066 && p.mouseX < 1139 && p.mouseY > 64 && p.mouseY < 125) {
+				pantalla = 1;
+			}
+
+			break;
+
+		case 11:
 
 			if (p.mouseX > 365 && p.mouseX < 599 && p.mouseY > 265 && p.mouseY < 437) {
 				pantalla = 7;
 			}
+
+			break;
+
+		default:
+			break;
 		}
 
-		if (pantalla == 7) {
-
-			if (p.mouseX > 599 && p.mouseX < 833 && p.mouseY > 265 && p.mouseY < 437) {
-				pantalla = 3;
-				iniciando();
-			}
-			
-			if (p.mouseX > 458 && p.mouseX < 742 && p.mouseY > 523 && p.mouseY < 598) {
-				pantalla = 0;
-			}
-			
-			if (p.mouseX > 1066 && p.mouseX < 1139 && p.mouseY > 64 && p.mouseY < 125) {
-				pantalla = 1;
-			}
-		}
 	}
 
 	// En este método llega el mensaje de Android
@@ -616,11 +657,17 @@ public class Logica implements Servidor.Mensaje {
 				// Siguiente
 				else if (msj == 6) {
 					pantalla = 2;
+					restar = p.millis();
+					enJuego = true;
+
 				}
 
 				// Jugar
 				else if (msj == 7) {
 					pantalla = 3;
+					restar = p.millis();
+					enJuego = true;
+
 				}
 			}
 		}).start();

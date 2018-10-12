@@ -22,7 +22,7 @@ class Cliente extends Thread {
 
         try{
 
-            s = new Socket("172.30.159.156", 5000);
+            s = new Socket("172.30.126.192", 5000);
 
         } catch (Exception e){
 

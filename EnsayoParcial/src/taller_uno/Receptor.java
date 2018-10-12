@@ -30,7 +30,7 @@ public class Receptor extends Thread{
 			while (true) {
 				
 				String mensaje = lector.readLine();
-				System.out.println(mensaje);
+				//System.out.println(mensaje);
 
 				observer.recibido(mensaje, yo);
 			}

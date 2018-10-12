@@ -21,8 +21,8 @@ public class Aleatorios {
 		corazon = p.loadImage("../data/corazon.png");
 		
 		// Inicializo variables
-		//x = (int) p.random(100, 1100);
-		x = 575;
+		x = (int) p.random(100, 1100);
+		//x = 575;
 		y = -20;
 	}
 	

@@ -72,8 +72,8 @@ public class Personaje {
 	
 	public void sumaVida() {
 		
-		if ( vidas <= 450 ) {
-			vidas += 50;
+		if ( vidas <= 420 ) {
+			vidas += 80;
 		}	
 	}
 
@@ -119,5 +119,13 @@ public class Personaje {
 
 	public void setVida(int vida) {
 		this.vidas = vida;
+	}
+
+	public int getVidas() {
+		return vidas;
+	}
+
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
 	}
 }
