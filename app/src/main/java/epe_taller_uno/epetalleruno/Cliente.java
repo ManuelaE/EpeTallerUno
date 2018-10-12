@@ -52,6 +52,7 @@ class Cliente extends Thread {
                 }
             }
         }).start();
+        
     }
 
     public synchronized static Cliente getInstance(){
